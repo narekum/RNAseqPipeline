@@ -1,0 +1,135 @@
+  #############################################################################
+   _____  _   _                              
+  |  __ \| \ | |   /\                        
+  | |__) |  \| |  /  \ ______ ___  ___  __ _ 
+  |  _  /| . ` | / /\ \______/ __|/ _ \/ _` |
+  | | \ \| |\  |/ ____ \     \__ \  __/ (_| |
+  |_|  \_\_| \_/_/    \_\    |___/\___|\__, |
+  Tophat2, fastqc, picard, trim galore    | |
+  Samtools, bedtools, ucsc tools          |_| 
+   ____  _            _ _            
+  |  _ \(_)_ __   ___| (_)_ __   ___ 
+  | |_) | | '_ \ / _ \ | | '_ \ / _ \
+  |  __/| | |_) |  __/ | | | | |  __/
+  |_|   |_| .__/ \___|_|_|_| |_|\___|
+          |_|                        
+ 
+  Institute of Cancer Sciences
+  Epigenetics Unit
+  University of Glasgow
+  Garscube Estate
+  Glasgow G61 1QH
+
+  Report bugs to narekum@gmail.com or narendra.kumar@glasgow.ac.uk
+
+  Copyright 2016 Narendra Kumar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; version 3 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see <http://www.gnu.org/licenses/>
+  or write to the Free Software Foundation, Inc., 51 Franklin Street,
+  Fifth Floor, Boston, MA 02110-1301, USA.
+
+  Python scripts bedToBedGraph.py and extendbed were written by Tony McBryan.
+
+  ==============================================================================
+
+
+
+  *Prerequisite
+
+  Install the following programs on your system
+
+  1. Tophat2
+     https://ccb.jhu.edu/software/tophat/index.shtml
+
+  2. FASTQC
+     http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+  3. Picard tools
+     https://broadinstitute.github.io/picard/
+
+  4. Trim Galore
+     http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
+
+  5. SAMtools
+     http://samtools.sourceforge.net/
+
+  6. bedtools: a powerful toolset for genome arithmetic
+     http://bedtools.readthedocs.io/en/latest/index.html
+
+  7. Following programs from UCSCtools
+     http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/ (for 64 bit linux)
+     bedToBigBed
+     fetchChromSizes
+     wigToBigWig
+
+
+
+  *Installation
+
+  1. To install RNA-seq pipeline, untar the package at your favorite place.
+
+  2. Change the value of variables in lines from 85 to 97 to the appropriate
+     location of the program on your system
+
+     Make sure you set the path to the index files of the genomes for
+     bowtie2. You may download from the following locations.
+
+     http://bowtie-bio.sourceforge.net/bowtie2/index.shtml
+     http://support.illumina.com/sequencing/sequencing_software/igenome.html
+
+  You can now start using by giving the full path of the perl script
+
+  perl <full path to parent directory>/bin/tophat2Pipeline.pl <options>
+
+  You may make an alias of executable as use it from anywhere without having
+  to write full path
+
+  Add following line in your ~/.bashrc file
+
+  alias bowtie2Pipeline="<full path to parent directory>/RNAseq_Pipeline/bin/tophat2Pipeline.pl.pl"
+
+
+
+  *User manual
+  
+  Usage: tophat2Pipeline.pl < --dir MAPDIRECTORY --gft GTFFILE --species SPECIES --quals QUALS > [Options]
+
+  Options:
+
+    -h, --help       Show this help message.
+
+    -d, --dir        directory where sequences are kept  (required)
+
+    -g, --gtf        gtf file (required)
+
+    -s, --species    species e.g. hg19  (required)
+
+    -q, --quals      quals (required)
+                     available quals: phred33-quals
+                                      phred64-quals
+                                      solexa1.3-quals
+
+    -t, --threads    number of processors to be used (default 2)
+
+    -e, --extra      extra bowtie options enclosed in quote ""
+
+    -z, --zip        zip the fastq files after the run y=yes; n=no (default y)
+
+  Examples:
+
+  $ perl tophat2Pipeline.pl --dir mapdirectory --gft gtffile.gtf --species hg19 --quals phred33-quals
+  \or\
+  $ perl tophat2Pipeline.pl  -d mapdirectory -g gtf gtffile.gtf -s hg19 -q phred33-quals -t 8 -z n
+
+  #############################################################################
+                          * End of the file *
